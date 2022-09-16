@@ -21,6 +21,9 @@ export const main =
     (Funder, Receiver, Bystander) => {
 
 // 1. The Funder publishes the parameters of the fund and makes the initial deposit.
+Funder.publish(receiverAddr, payment, maturity, refund, dormant )
+  .pay(payment);
+
 // 2. The consensus remembers who the Receiver is.
 // 3. Everyone waits for the fund to mature.
 // 4. The Receiver may extract the funds with a deadline of `refund`.
