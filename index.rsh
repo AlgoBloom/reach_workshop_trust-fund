@@ -1,19 +1,21 @@
 'reach 0.1';
 
-export const main = Reach.App(() => {
-  const A = Participant('Alice', {
-    // Specify Alice's interact interface here
-  });
-  const B = Participant('Bob', {
-    // Specify Bob's interact interface here
-  });
-  init();
-  // The first one to publish deploys the contract
-  A.publish();
-  commit();
-  // The second one to publish always attaches
-  B.publish();
-  commit();
-  // write your program here
-  exit();
-});
+const common = {
+  funded: Fun([], Null),
+  ready : Fun([], Null),
+  recvd : Fun([UInt], Null) };
+  
+export const main =
+  Reach.App(
+    {},
+    [ Participant('Funder', {
+      ...common,
+      getParams: Fun([], Object({
+        receiverAddr: Address,
+        payment:      UInt,
+        maturity:     UInt,
+        refund:       UInt,
+        dormant:      UInt })) }),
+      Participant('Receiver', common),
+      Participant('Bystander', common) ],
+    (Funder, Receiver, Bystander) => {
