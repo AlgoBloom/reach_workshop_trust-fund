@@ -36,17 +36,4 @@ Receiver.publish()
   .timeout(refund,
     () => {
      // 5. The Funder may extract the funds with a deadline of `dormant`.
-      Funder.publish()
-        .timeout(dormant,
-          () => {
-            // 6. The Bystander may extract the funds with no deadline.
-            Bystander.publish();
-            transfer(payment).to(Bystander);
-            commit();
-            exit(); });
-       transfer(payment).to(Funder);
-       commit();
-       exit(); });
-transfer(payment).to(Receiver);
-commit();
-exit();
+     // 6. The Bystander may extract the funds with no deadline.
