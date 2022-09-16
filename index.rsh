@@ -29,6 +29,8 @@ Receiver.set(receiverAddr);
 commit();
 
 // 3. Everyone waits for the fund to mature.
+wait(maturity);
+
 // 4. The Receiver may extract the funds with a deadline of `refund`.
 // 5. The Funder may extract the funds with a deadline of `dormant`.
 // 6. The Bystander may extract the funds with no deadline.
